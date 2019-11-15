@@ -1,0 +1,2 @@
+export const instanceLocator = 'v1:us1:8760cf9f-601d-40f0-bd72-27ac26a6f695';
+export const tokenUrl = 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/8760cf9f-601d-40f0-bd72-27ac26a6f695/token';

@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { Sidebar } from './components/layout/Sidebar';
+import { Content } from './components/layout/Content';
+import { SelectedRoomProvider } from './context/useSelectedRoom-context';
+import { RoomsProvider } from './context/useRooms-context';
+import { CreateRoomModal } from './components/Room/CreateRoomModal'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RoomsProvider>
+        <SelectedRoomProvider>
+          <Sidebar />
+          <Content />
+          <CreateRoomModal />
+        </SelectedRoomProvider>
+      </RoomsProvider>
     </div>
   );
 }
