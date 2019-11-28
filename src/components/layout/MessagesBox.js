@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelectedRoomValue } from '../../context/useSelectedRoom-context';
-import { useMessages } from '../../hooks/useMessages';
+import { useRooms } from '../../hooks/useRooms';
 import { MessageList } from '../Message/MessageList';
 import { SendMessage } from '../Message/SendMessage';
 import { FaPaperPlane } from 'react-icons/fa';
 
+
 export const MessagesBox = () => {
     const {selectedRoom} = useSelectedRoomValue();
-    const {sendMessage} = useMessages(selectedRoom);
+    const {sendMessage} = useRooms();
 
     return(
         <div className="messages-box">

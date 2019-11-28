@@ -1,21 +1,24 @@
 import React from 'react';
 import './App.scss';
-import { Sidebar } from './components/layout/Sidebar';
-import { Content } from './components/layout/Content';
 import { SelectedRoomProvider } from './context/useSelectedRoom-context';
 import { RoomsProvider } from './context/useRooms-context';
-import { CreateRoomModal } from './components/Room/CreateRoomModal'
+import { AuthProvider } from './context/useAuth-context';
+import { Container } from './components/layout/Container';
+import { LoadingProvider } from './context/loading-context';
+
 
 function App() {
   return (
     <div className="App">
-      <RoomsProvider>
-        <SelectedRoomProvider>
-          <Sidebar />
-          <Content />
-          <CreateRoomModal />
-        </SelectedRoomProvider>
-      </RoomsProvider>
+      <AuthProvider >
+        <RoomsProvider>
+          <SelectedRoomProvider>
+            <LoadingProvider>
+              <Container />
+            </LoadingProvider>
+          </SelectedRoomProvider>
+        </RoomsProvider>
+      </AuthProvider>
     </div>
   );
 }

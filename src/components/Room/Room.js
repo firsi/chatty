@@ -1,7 +1,8 @@
 import React from 'react';
+import { Unread } from '../unread/Unread';
 
 
-export const Room = ({name, createdByUser, createdAt, icon: Icon, action, actionParam: param}) => (
+export const Room = ({name, createdByUser, createdAt, count}) => (
     
     <div className="single-room">  
         <div>
@@ -12,7 +13,7 @@ export const Room = ({name, createdByUser, createdAt, icon: Icon, action, action
             <span className="room-creation-date">
                 {createdAt}
             </span>
-            {Icon && <button onClick={() => action()}><Icon /></button>}
+            {count>0 && <Unread count={count} />}
         </div>
     </div>
 )

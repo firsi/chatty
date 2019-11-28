@@ -1,37 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useMessages } from '../../hooks/useMessages';
-import { useSelectedRoomValue } from '../../context/useSelectedRoom-context';
-import { Message } from './Message';
+import { useLoadingValue } from '../../context/loading-context';
+import { useAuthValue } from '../../context/useAuth-context';
 import { formatDate } from '../../helpers/index';
-import { Loader } from '../Loader';
+import { Message } from './Message';
+import { Loader } from '../Loader/Loader';
 
 export const MessageList = () => {
-    const {selectedRoom} = useSelectedRoomValue();
-    const {messages, user} = useMessages(selectedRoom);
-    const [loading, setLoading] = useState(false);
-    
-    useEffect(() => {
-        if (!messages[0] && selectedRoom){
-            setLoading(true);
-        }
-        else {
-            setLoading(false);
-        }
-    },[messages, selectedRoom])
+    const {auth} = useAuthValue();
+    const {loading} = useLoadingValue();
+    const {messages} = useMessages();
 
+    useEffect(() => {
+       const node =  document.querySelector('.message-list-container');
+       node.scrollTop = node.scrollHeight;
+    })
+    
     return (
         <div className="message-list-container">
-            {
-                 !loading  ? messages.map((message, index) => (
-                    <Message 
-                        key={`messages${index}`} 
-                        username={message.senderId}
-                        message={message.text}
-                        createdAt={formatDate(message.createdAt)} 
-                        reverse={user.id === message.senderId}
-                     />   
-                ))
-                : <div className="loader-container"><Loader /></div>
+            {    
+                 loading ? <div className="loader-container"><Loader /></div>  
+                 
+                 : messages.map((message, index) => (
+                        <Message 
+                            key={`messages${index}`} 
+                            username={message.senderId}
+                            message={message.text}
+                            createdAt={formatDate(message.createdAt)} 
+                            reverse={auth.id === message.senderId}
+                        />
+                    ))   
             } 
         </div>
     )

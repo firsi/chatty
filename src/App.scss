@@ -9,6 +9,9 @@ html,body{
     -moz-osx-font-smoothing: grayscale;
     overflow-y:hidden;
 }
+body{
+    background: #d6d4d452;
+}
 
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
@@ -49,6 +52,14 @@ ul,h2{
     --secondary-color: #929292;
 }
 
+/* Mixins
+     ============================================ */
+     @mixin btn-default(){
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+    }
+    
 // App
 .App{
     display: flex;
@@ -58,7 +69,7 @@ ul,h2{
 main{
     width: 100%;
     padding: 3%;
-    background-color: var(--main-bg-color);
+   // background-color: var(--main-bg-color);
 
     h1{
         margin-top:0;
@@ -67,6 +78,62 @@ main{
     .content{
         display: flex;
         height: 89%;
+    
+
+        .welcome{
+            margin: 10% auto;
+            color: var(--primary-color);
+            font-size: 1.7em;
+            text-align: center;
+            animation: fadein 1.5s;
+                        
+            .left-arrow{
+                padding-right: 2%;
+                animation-name: animate-top-down;
+                animation-duration: 1s;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+            }
+
+            .mobile-directions {
+                display: none;
+            }
+
+            span{
+                color: #000;
+            }
+
+            .blog{
+                margin-top: 5%;
+                font-size: 2em;
+            }
+
+            @keyframes animate-top-down{
+                0% {
+                    transform: translateX(0);
+                }
+
+                50% {
+                    transform: translateX(10px);
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                opacity:0;
+                transform: translateY(-30px);
+            }
+    
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
 
         .rooms-box form, .messages-header {
             height:13%;
@@ -83,15 +150,48 @@ main{
     }
 } 
 
-
-/* Mixins
+/* Header
      ============================================ */
-@mixin btn-default(){
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-}
+    .close-header{
+        transform: translateY(-100px);
+    }
+    .open-header{
+        transform: translateY(0);
+    }
+    header {
+        padding: 2%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        background-color: var(--primary-color);
+        z-index: 299;
+        transition: transform 1s;
+        display: none;
 
+        .logo-container{
+            color: white;
+            min-width: 150px;
+
+            button {
+                @include btn-default();
+                svg{
+                    margin-right: 5%;
+                }
+            }
+
+            span{
+                font-size: 1.2em;
+                font-weight: 700;
+            }
+        }
+        .profile .small{
+            width:30px;
+            height:30px;
+        }
+    }
 
 
 /* Sidebar
@@ -103,6 +203,9 @@ main{
  color: var(--secondary-color);
  z-index: 99;
  
+ .close-btn{
+    display: none;
+ }
 
  .rooms-actions {
     margin-top: 20%;
@@ -216,6 +319,7 @@ main{
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    align-items: flex-end;
 
                     button {
                         @include btn-default();
@@ -384,11 +488,155 @@ main{
     }
 }
 
-/* min-width:468px
+/* Login/Signup
      ============================================ */
+     .login{
+         .hint{
+             font-size: 0.95em;
+             margin-left: 2%;
+         }
 
+         input{
+             padding-left: 2%;
+         }
+
+         button{
+             display: inline-flex;
+             justify-content: space-around;
+             align-items: center;
+
+             &:hover svg{
+                color: rgb(39, 23, 112);
+             }
+
+             &[disabled]{
+                 background-color: grey;
+             }
+         }
+
+         .error{
+             padding-left:2%;
+             font-size: 0.77em;
+             color: rgb(177, 8, 8);
+         }
+     }
+
+/* max-width:468px
+     ============================================ */
+@media screen and (max-width: 768px){
+    .App{
+        flex-direction: column;
+    }
+    .close-sidebar{
+        transform: translateX(-250px);
+    }
+
+    .open-sidebar{
+        transform: translateX(0)!important;
+    }
+
+    .hide-box{
+        display: none !important;
+    }
+
+    .show-box{
+        display: flex !important;
+    }
+
+    header{
+        display: flex;
+    }
+    
+    .sidebar{
+        position: absolute;
+        width: 150px;
+        height: 100%;
+        font-size:0.75em;
+        transform: translateX(-250px);
+        transition: transform 1s;
+
+        .close-container{
+            text-align: right;
+
+            .close-btn{
+                display: inline-block;
+                color: #993337;
+                font-size: 1.5em;
+                text-align: right;
+                @include btn-default();
+            }
+        }
+        .profile .medium{
+            width:60px;
+            height:60px;
+        }
+     }
+
+     main{
+         width: 100%;
+         height: 100%;
+         h1:nth-child(1){
+            display: none;
+         }
+
+         .content {
+             height: 100%;
+             padding-left: 1%;
+             padding-right: 1%;
+
+            .welcome {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+   
+                h2{
+                    font-size: 1.3em;
+                }
+   
+                .mobile-directions {
+                   display: inline;
+                   font-size: 0.85em;
+                }
+                
+                .directions {
+                    display: none;
+                }
+   
+                .left-arrow {
+                   display: none;
+                }
+            }
+
+            .messages-header{
+                height: auto;
+            }
+         }
+     }
+     .show-rooms{
+        width: 100%!important;
+     }
+
+     .rooms-box{
+         .single-room{
+             font-size: 0.85em;
+         }
+     }
+
+     .messages-box .message-list-container{
+        height: 87%; 
+
+        .message-container{
+            font-size: 0.8em;
+            
+            .message{
+                max-width: 250px;
+            }
+        }
+     }
+}
 
 /* min-width:768px
      ============================================ */
-
-
+     
+    
