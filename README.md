@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can find a demo of the project here: https://nervous-noyce-b2eeb2.netlify.com
 
 ## Available Scripts
 
