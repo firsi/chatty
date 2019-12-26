@@ -9,6 +9,8 @@ import { Loader } from '../Loader/Loader';
 export const MessageList = () => {
     const {auth} = useAuthValue();
     const {loading} = useLoadingValue();
+    // cf. <MessagesBox /> comment here, same thing apply
+    // by getting your data from the global state, you don't allow your component to be used to display two conversation at the same time for example.
     const {messages} = useMessages();
 
     useEffect(() => {
