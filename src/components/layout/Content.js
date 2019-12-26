@@ -22,7 +22,7 @@ export const Content = () => {
                     </span>
                     <FaBlog className="blog"/>
                 </div>
-                : <MessagesBox />
+                : <MessagesBox selectedRoom={selectedRoom} />
             }
         </div>
     </main>)

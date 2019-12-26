@@ -6,8 +6,16 @@ import { SendMessage } from '../Message/SendMessage';
 import { FaPaperPlane } from 'react-icons/fa';
 
 
-export const MessagesBox = () => {
-    const {selectedRoom} = useSelectedRoomValue();
+// we get the selected room from the props (cf. check <Content />)
+export const MessagesBox = ({ selectedRoom }) => {
+    // 1. here you use hooks to retrieve data from the selected room all across your application
+    // As a rule of thumb, whenever it's possible, try to pass data from props instead
+    // For example, the component <Content /> already retrieve the selected room
+    // and will be to easily pass data.
+    // The reasoning is that if for any reason later on you would like to use this component for an other room
+    // which is not the selected one in your app, you would be able to do so.
+    // const {selectedRoom} = useSelectedRoomValue();
+    // cf. comment above with props
     const {sendMessage} = useRooms();
 
     return(
